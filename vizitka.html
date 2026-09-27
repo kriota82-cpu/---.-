@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Павел Снытин — визитка</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --card: #121212;
+    --border: rgba(255,255,255,0.08);
+    --text: #f2f2f2;
+    --muted: #9a9a9a;
+    --accent1: #6ee7ff;
+    --accent2: #a78bfa;
+    --accent3: #34d399;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Ambient background glow */
+  .bg-glow {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(110,231,255,0.10), transparent 40%),
+      radial-gradient(circle at 80% 30%, rgba(167,139,250,0.10), transparent 45%),
+      radial-gradient(circle at 50% 90%, rgba(52,211,153,0.08), transparent 45%);
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-2%, 2%) scale(1.05); }
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: clamp(28px, 6vw, 48px) clamp(24px, 5vw, 40px);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    animation: fadeUp 0.7s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .avatar {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #0a0a0a;
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.04), 0 0 40px rgba(110,231,255,0.35);
+  }
+
+  .name {
+    margin: 0;
+    font-size: clamp(28px, 6vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2) 50%, var(--accent3));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 5s linear infinite;
+    text-shadow: 0 0 30px rgba(110,231,255,0.15);
+  }
+
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
+
+  .role {
+    margin: 10px 0 28px;
+    font-size: clamp(14px, 3vw, 16px);
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  .socials {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .social-link {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  }
+
+  .social-link svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    transition: transform 0.25s ease;
+  }
+
+  .social-link:hover,
+  .social-link:focus-visible {
+    transform: translateY(-4px);
+    background: rgba(110,231,255,0.08);
+    border-color: rgba(110,231,255,0.4);
+    box-shadow: 0 10px 30px rgba(110,231,255,0.25);
+  }
+
+  .social-link:hover svg {
+    transform: scale(1.1);
+  }
+
+  .cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0a0a0a;
+    background: linear-gradient(135deg, var(--accent1), var(--accent3));
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(52,211,153,0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .cta:hover,
+  .cta:focus-visible {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 14px 40px rgba(52,211,153,0.4);
+  }
+
+  .cta:active {
+    transform: translateY(0) scale(0.99);
+  }
+
+  .cta::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform: skewX(-20deg);
+    animation: sweep 2.8s ease-in-out infinite;
+  }
+
+  @keyframes sweep {
+    0%   { left: -60%; }
+    60%  { left: 130%; }
+    100% { left: 130%; }
+  }
+
+  .cta svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-note {
+    margin-top: 22px;
+    font-size: 12px;
+    color: #555;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 380px) {
+    .socials { gap: 12px; }
+    .social-link { width: 46px; height: 46px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <main class="card">
+    <div class="avatar">ПС</div>
+
+    <h1 class="name">Павел Снытин</h1>
+    <p class="role">Управленческий учёт</p>
+
+    <div class="socials">
+      <a class="social-link" href="https://t.me/pavel_snytin" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9.036 15.803 8.72 20.36c.46 0 .658-.198.897-.436l2.155-2.06 4.47 3.26c.82.452 1.402.214 1.62-.76l2.94-13.77.001-.001c.257-1.2-.436-1.67-1.235-1.372L2.36 9.98c-1.166.454-1.148 1.106-.198 1.4l4.905 1.53L18.7 6.02c.53-.34 1.014-.152.617.19"/>
+        </svg>
+      </a>
+    </div>
+
+    <a class="cta" href="https://t.me/pavel_snytin" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9.036 15.803 8.72 20.36c.46 0 .658-.198.897-.436l2.155-2.06 4.47 3.26c.82.452 1.402.214 1.62-.76l2.94-13.77.001-.001c.257-1.2-.436-1.67-1.235-1.372L2.36 9.98c-1.166.454-1.148 1.106-.198 1.4l4.905 1.53L18.7 6.02c.53-.34 1.014-.152.617.19"/>
+      </svg>
+      <span>Написать мне</span>
+    </a>
+
+    <p class="footer-note">@pavel_snytin</p>
+  </main>
+
+</body>
+</html>
